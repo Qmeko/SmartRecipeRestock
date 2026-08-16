@@ -6,3 +6,4 @@ obj/
 *.bak
 *.bak_*
 artifacts/
+.tmp-DalamudPlugins/
