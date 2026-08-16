@@ -1,0 +1,21 @@
+{
+  "Author": "Qmeko",
+  "Name": "Smart Recipe Restock",
+  "InternalName": "SmartRecipeRestockHelper",
+  "AssemblyVersion": "0.3.0.0",
+  "Description": "Read the open crafting recipe and withdraw missing materials from each retainer. No SND required.",
+  "RepoUrl": "https://github.com/Qmeko/SmartRecipeRestock",
+  "ApplicableVersion": "any",
+  "Tags": [
+    "inventory",
+    "retainer",
+    "crafting",
+    "utility"
+  ],
+  "DalamudApiLevel": 15,
+  "LoadRequiredState": 0,
+  "LoadSync": false,
+  "LoadPriority": 0,
+  "Punchline": "Withdraw missing recipe materials from each retainer",
+  "AcceptsFeedback": false
+}

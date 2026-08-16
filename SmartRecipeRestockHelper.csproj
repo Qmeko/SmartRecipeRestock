@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <Platforms>x64</Platforms>
+    <LangVersion>latest</LangVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>SmartRecipeRestockHelper</AssemblyName>
+    <RootNamespace>SmartRecipeRestockHelper</RootNamespace>
+    <Version>0.3.0</Version>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+  </PropertyGroup>
+
+  <!-- DalamudLibPath: set by build.ps1 via /p:DalamudLibPath=... or env DALAMUD_HOME -->
+  <PropertyGroup>
+    <DalamudLibPath Condition="'$(DalamudLibPath)' == ''">$(DALAMUD_HOME)</DalamudLibPath>
+    <DalamudLibPath Condition="'$(DalamudLibPath)' == ''">$(APPDATA)\XIVLauncher\addon\Hooks\dev\</DalamudLibPath>
+    <_DalamudDll>$(DalamudLibPath)Dalamud.dll</_DalamudDll>
+    <_FFXIVClientStructsDll>$(DalamudLibPath)FFXIVClientStructs.dll</_FFXIVClientStructsDll>
+    <_InteropGeneratorRuntimeDll>$(DalamudLibPath)InteropGenerator.Runtime.dll</_InteropGeneratorRuntimeDll>
+  </PropertyGroup>
+
+  <Target Name="ValidateDalamudLibPath" BeforeTargets="ResolveReferences">
+    <Error
+      Condition="!Exists('$(_DalamudDll)')"
+      Text="Dalamud dev libraries not found at '$(DalamudLibPath)'. Run SmartRecipeRestockHelper\build.ps1 or set DALAMUD_HOME / /p:DalamudLibPath=..." />
+    <Error
+      Condition="!Exists('$(_FFXIVClientStructsDll)')"
+      Text="FFXIVClientStructs.dll not found at '$(DalamudLibPath)'." />
+    <Error
+      Condition="!Exists('$(_InteropGeneratorRuntimeDll)')"
+      Text="InteropGenerator.Runtime.dll not found at '$(DalamudLibPath)'." />
+  </Target>
+
+  <ItemGroup>
+    <Compile Remove="docs\**" />
+    <None Include="docs\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DalamudPackager" Version="15.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Dalamud">
+      <HintPath>$(_DalamudDll)</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="FFXIVClientStructs">
+      <HintPath>$(_FFXIVClientStructsDll)</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="InteropGenerator.Runtime">
+      <HintPath>$(_InteropGeneratorRuntimeDll)</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Lumina">
+      <HintPath>$(DalamudLibPath)Lumina.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Lumina.Excel">
+      <HintPath>$(DalamudLibPath)Lumina.Excel.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Dalamud.Bindings.ImGui">
+      <HintPath>$(DalamudLibPath)Dalamud.Bindings.ImGui.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="SmartRecipeRestockHelper.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>
