@@ -16,6 +16,8 @@
   "LoadRequiredState": 0,
   "LoadSync": false,
   "LoadPriority": 0,
-  "Punchline": "Withdraw missing recipe materials from each retainer",
+  "Punchline": "Withdraw missing recipe materials from each retainer.",
+  "DownloadLinkInstall": "https://github.com/Qmeko/SmartRecipeRestock/releases/latest/download/SmartRecipeRestock.zip",
+  "DownloadLinkUpdate": "https://github.com/Qmeko/SmartRecipeRestock/releases/latest/download/SmartRecipeRestock.zip",
   "AcceptsFeedback": false
 }
